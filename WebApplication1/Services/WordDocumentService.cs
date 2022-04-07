@@ -182,6 +182,8 @@ namespace WebApplication1.Services
                 _wordDocumentHelper.WritingWordReportConstruccionSinister(doc, tablaReports.sinister);
                 List<DocumentTypeFile> listDocumentTypeFiles = ListFilesToS3(tablaReports);
                 _wordDocumentHelper.AddImgToWordReportConstruccionArchive(doc, listDocumentTypeFiles);
+                _wordDocumentHelper.AddTableWordReportConstruccionArchive(doc, listDocumentTypeFiles);
+                _wordDocumentHelper.AddImgToTableToWordReportConstruccion(doc, listDocumentTypeFiles);
                 doc.Close();
             }
 
@@ -211,6 +213,9 @@ namespace WebApplication1.Services
             {
                 MemoryStream msImageLogo = GetFileToBase64(ImageBase64.IMAGE_LOGO);
                 MemoryStream msImageFirma = GetFileToBase64(ImageBase64.IMAGE_FIRMA);
+                MemoryStream msImageFotografia_1 = GetFileToBase64(ImageBase64.IMAGE_FOTOGRAFIA_1);
+                MemoryStream msImageFotografia_2 = GetFileToBase64(ImageBase64.IMAGE_FOTOGRAFIA_2);
+                MemoryStream msImageFotografia_3 = GetFileToBase64(ImageBase64.IMAGE_FOTOGRAFIA_3);
                 DocumentTypeFile document1 = new DocumentTypeFile()
                 {
                     File = msImageLogo,
@@ -225,9 +230,33 @@ namespace WebApplication1.Services
                     NomFile = "firma.png",
                     TypeFile = "02"
                 };
+                DocumentTypeFile document3 = new DocumentTypeFile()
+                {
+                    File = msImageFotografia_1,
+                    Extension = "jpg",
+                    NomFile = "fotografia_1.jpg",
+                    TypeFile = "04"
+                };
+                DocumentTypeFile document4 = new DocumentTypeFile()
+                {
+                    File = msImageFotografia_2,
+                    Extension = "jpg",
+                    NomFile = "fotografia_2.jpg",
+                    TypeFile = "04"
+                };
+                DocumentTypeFile document5 = new DocumentTypeFile()
+                {
+                    File = msImageFotografia_3,
+                    Extension = "jpg",
+                    NomFile = "fotografia_3.jpg",
+                    TypeFile = "04"
+                };
                 List<DocumentTypeFile> listDocumentTypeFiles = new List<DocumentTypeFile>();
                 listDocumentTypeFiles.Add(document1);
                 listDocumentTypeFiles.Add(document2);
+                listDocumentTypeFiles.Add(document3);
+                listDocumentTypeFiles.Add(document4);
+                listDocumentTypeFiles.Add(document5);
                 return listDocumentTypeFiles;
 
             }

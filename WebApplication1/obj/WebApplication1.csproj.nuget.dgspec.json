@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Personal\\Projects\\ConsumeServiceAWS\\WebApplication1\\WebApplication1.csproj": {}
+    "D:\\Projects\\NET\\WorkOpenXMLSdkDotnet\\WebApplication1\\WebApplication1.csproj": {}
   },
   "projects": {
-    "D:\\Personal\\Projects\\ConsumeServiceAWS\\WebApplication1\\WebApplication1.csproj": {
+    "D:\\Projects\\NET\\WorkOpenXMLSdkDotnet\\WebApplication1\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Personal\\Projects\\ConsumeServiceAWS\\WebApplication1\\WebApplication1.csproj",
+        "projectUniqueName": "D:\\Projects\\NET\\WorkOpenXMLSdkDotnet\\WebApplication1\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "D:\\Personal\\Projects\\ConsumeServiceAWS\\WebApplication1\\WebApplication1.csproj",
+        "projectPath": "D:\\Projects\\NET\\WorkOpenXMLSdkDotnet\\WebApplication1\\WebApplication1.csproj",
         "packagesPath": "C:\\Users\\Enrique Nunez\\.nuget\\packages\\",
-        "outputPath": "D:\\Personal\\Projects\\ConsumeServiceAWS\\WebApplication1\\obj\\",
+        "outputPath": "D:\\Projects\\NET\\WorkOpenXMLSdkDotnet\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

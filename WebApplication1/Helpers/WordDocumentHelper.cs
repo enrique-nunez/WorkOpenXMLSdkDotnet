@@ -486,12 +486,12 @@ namespace WebApplication1.Helpers
 
                     foreach (var documentTypeFile in listDocumentTypeFiles)
                     {
-                        if (documentTypeFile.TypeFile == "01")
+                        if (documentTypeFile.TypeFile == TypeFiles.FOTO_PREDIO_INFORME_RIESGO_CHECKLIST_TAB4_INFORME_CONSTRUCCION_TAB1)
                         {
                             InsertAPictureNew(doc, documentTypeFile.File, ReportConstructionTag.REPORT_CONSTRUCTION_ARCHIVE_LOGO, FileSizeDocument.WIDTH_SIZE_LOGO_TYPE_01, FileSizeDocument.HEIGHT_SIZE_LOGO_TYPE_01);
                         }
 
-                        if (documentTypeFile.TypeFile == "02")
+                        if (documentTypeFile.TypeFile == TypeFiles.FIRMA_INSPECTOR_INFORME_RIESGO_CHECKLIST_TAB4_INFORME_CONSTRUCCION_TAB1)
                         {
                             InsertAPictureNew(doc, documentTypeFile.File, ReportConstructionTag.REPORT_CONSTRUCTION_ARCHIVE_FIRMA, FileSizeDocument.WIDTH_SIZE_FIRMA_TYPE_02, FileSizeDocument.HEIGHT_SIZE_FIRMA_TYPE_02);
                         }
@@ -508,6 +508,84 @@ namespace WebApplication1.Helpers
             }
         }
 
+        public bool AddTableWordReportConstruccionArchive(WordprocessingDocument doc, List<DocumentTypeFile> listDocumentTypeFiles)
+        {
+            try
+            {
+                int countImgTypeFotografia = listDocumentTypeFiles.Count(documentType => documentType.TypeFile == TypeFiles.FOTOGRAFIAS_INFORME_RIESGO_CHECKLIST_TAB12_TAB13_INFORME_CONSTRUCCION_TAB5);
+                int countFoto = 1;
+                int countRows = 0;
+                bool isPar = (countImgTypeFotografia % 2) == 0 ? true : false;
+                if (!isPar) { countRows = (countImgTypeFotografia + 1)/2; }
+                if (isPar) { countRows = countImgTypeFotografia/2; }
+                var wordDoc2 = doc.MainDocumentPart.Document;
+                //getting first table in word document specify as we use at zero index ElementAt(0)
+                Table table = wordDoc2.MainDocumentPart.Document.Body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().ElementAt(20);
+                for (int i = 0; i < countRows; i++)
+                {
+                    TableRow tr = new TableRow();
+                    TableCell tablecellService1 = new TableCell(new Paragraph(new Run(new Text("${{test_word_"+countFoto+"}}"))));
+                    countFoto++;
+                    if ((countFoto - countImgTypeFotografia == 1) && !isPar)
+                    {
+                        TableCell tablecellService2 = new TableCell(new Paragraph(new Run(new Text(" "))));
+                        tr.Append(tablecellService1, tablecellService2);
+                    }
+                    else
+                    {
+                        TableCell tablecellService2 = new TableCell(new Paragraph(new Run(new Text("${{test_word_"+countFoto+"}}"))));
+                        tr.Append(tablecellService1, tablecellService2);
+                    }
+                    countFoto++;
+                    table.AppendChild(tr);
+                }
+                /*//iterating throgh each customer in the list and adding in the table
+                TableRow trTile = new TableRow();
+                TableCell tablecellServiceTile = new TableCell(new Paragraph(new Run(new Text("DOCUMENTOS"))));
+                trTile.Append(tablecellServiceTile);
+                table.AppendChild(trTile);
+
+                TableRow trParr = new TableRow();
+                TableCell tablecellServiceParr1 = new TableCell(new Paragraph(new Run(new Text("Prueba1"))));
+                TableCell tablecellServiceParr2 = new TableCell(new Paragraph(new Run(new Text("Prueba2"))));
+                trParr.Append(tablecellServiceParr1, tablecellServiceParr2);
+                table.AppendChild(trParr);*/
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool AddImgToTableToWordReportConstruccion(WordprocessingDocument doc, List<DocumentTypeFile> listDocumentTypeFiles)
+        {
+            try
+            {
+                if (listDocumentTypeFiles.Count > 0)
+                {
+                    int countFoto = 1;
+                    foreach (var documentTypeFile in listDocumentTypeFiles)
+                    {
+                        if (documentTypeFile.TypeFile == TypeFiles.FOTOGRAFIAS_INFORME_RIESGO_CHECKLIST_TAB12_TAB13_INFORME_CONSTRUCCION_TAB5)
+                        {
+                            InsertAPictureNew(doc, documentTypeFile.File, "${{test_word_"+countFoto+"}}", FileSizeDocument.WIDTH_SIZE_FIRMA_TYPE_04, FileSizeDocument.HEIGHT_SIZE_FIRMA_TYPE_04);
+                            countFoto++;
+                        }
+                    }
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
         #endregion
     }
 }
